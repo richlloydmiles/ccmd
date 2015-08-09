@@ -213,6 +213,16 @@ class ccmd {
 				</script>
 				<?php
 				break;
+				case 'wysiwyg':
+				$args = array(
+					'textarea_rows' => 15,
+					'teeny' => true,
+					'textarea_name' => 'cat_settings[' . $setting['id'] .']',
+					);
+				$value = "";
+				if(isset($term_meta[$setting['id']])) {$value = $term_meta[$setting['id']];}
+				wp_editor( $value, 'editor', $args );
+				break;
 				default:
 				#default reverts to text input
 				?>
