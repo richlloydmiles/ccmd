@@ -223,6 +223,33 @@ class ccmd {
 				if(isset($term_meta[$setting['id']])) {$value = $term_meta[$setting['id']];}
 				wp_editor( $value, 'editor', $args );
 				break;
+				case 'post':
+				?>
+				<select id="select_<?php echo $setting['id']; ?>">
+					<?php
+					query_posts( array( 'post_type' => $setting['post_type'] ,  'showposts' => '-1' ) ) ;
+					if ( have_posts() ) : while ( have_posts() ) : the_post();?>
+					<option value="<?php the_id();?>" 
+						<?php selected( get_the_title(), $term_meta[$setting['id']] ); ?>
+						><?php the_title();?></option>
+					<?php endwhile; endif; wp_reset_query(); ?>
+				</select>
+
+				<input  type="hidden" 
+				name="cat_settings[<?php echo $setting['id']; ?>]"
+				id="cat_settings[<?php echo $setting['id']; ?>]"
+				value="<?php if(isset($term_meta[$setting['id']])) {echo $term_meta[$setting['id']];}?>">
+
+				<script>
+					jQuery(document).ready(function($) {
+						jQuery("#select_<?php echo $setting['id']; ?>").change(function() {
+							jQuery("#cat_settings\\[<?php echo $setting['id']; ?>\\]").val(jQuery("#select_<?php echo $setting['id']; ?> option:selected").val());
+						});
+					});
+				</script>
+
+				<?php
+				break;
 				default:
 				#default reverts to text input
 				?>
