@@ -10,6 +10,8 @@ The project is still in its infancy phase but supports the following input types
 * email
 * textarea
 * select
+* wysiwyg
+* post
 
 
 This project is aimed at WordPress plugin developers to encourage an alternative/progressive way to extend instances of a custom or regular post type.
