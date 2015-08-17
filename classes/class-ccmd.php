@@ -188,6 +188,7 @@ class ccmd {
 				?>
 				<select
 				id="select_<?php echo $setting['id']; ?>">
+				<option value="" disabled selected>Select your option</option>
 				<?php
 
 				foreach ($setting['options'] as $option) {
@@ -226,6 +227,7 @@ class ccmd {
 				case 'post':
 				?>
 				<select id="select_<?php echo $setting['id']; ?>">
+					<option value="" disabled selected>Select your option</option>
 					<?php
 					query_posts( array( 'post_type' => $setting['post_type'] ,  'showposts' => '-1' ) ) ;
 					if ( have_posts() ) : while ( have_posts() ) : the_post();?>
