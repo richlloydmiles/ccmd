@@ -252,6 +252,47 @@ class ccmd {
 
 				<?php
 				break;
+				case 'image':
+				?>
+				<?php if(isset($term_meta[$setting['id']])) {
+					?>
+					<img id="cat_settings[<?php echo $setting['id']; ?>]-image" src="<?php echo $term_meta[$setting['id']]; ?>" alt="" width="150px">
+					<?php
+				}
+
+				?>
+				<input type="text" 
+				name="cat_settings[<?php echo $setting['id']; ?>]"
+				id="cat_settings[<?php echo $setting['id']; ?>]"
+				value="<?php if(isset($term_meta[$setting['id']])) {echo $term_meta[$setting['id']];}?>">
+				<input class="upload_image_button button button-primary" type="button" value="Upload Image" />
+				<script>
+					jQuery(document).ready(function($) {
+						jQuery(document).on("click", ".upload_image_button", function() {
+
+							jQuery.data(document.body, 'prevElement', jQuery(this).prev());
+
+							window.send_to_editor = function(html) {
+								var imgurl = jQuery('img',html).attr('src');
+								var inputText = jQuery.data(document.body, 'prevElement');
+
+								if(inputText != undefined && inputText != '')
+								{
+									inputText.val(imgurl);
+									jQuery('#cat_settings\\[<?php echo $setting['id']; ?>\\]-image').attr('src' , imgurl )
+								}
+
+								tb_remove();
+							};
+
+							tb_show('', 'media-upload.php?type=image&TB_iframe=true');
+							return false;
+						});
+					});
+				</script>
+
+				<?php
+				break;
 				default:
 				#default reverts to text input
 				?>
