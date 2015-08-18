@@ -23,4 +23,12 @@ if (!function_exists('get_category_meta')) {
 	}
 }
 
+add_action('admin_enqueue_scripts' , function() {
+	wp_enqueue_script('media-upload');
+	wp_enqueue_script('thickbox');
+
+	wp_enqueue_style('thickbox');
+});
+ 
+
 
